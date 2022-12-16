@@ -20,9 +20,18 @@ service: product-service
 # Check out our docs for more details
 frameworkVersion: '3'
 
+plugins:
+  - serverless-esbuild
+
+custom:
+  esbuild:
+    bundle: true
+    minify: true
+
+
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs14.x
   stage: dev
   region: eu-west-1
 
@@ -57,11 +66,18 @@ provider:
 #    - include-me-dir/**
 
 functions:
-  hello:
-    handler: handler.hello
+  getProductsList:
+    handler: handler.getProductsList
     events:
       - http:
           path: /products
+          method: get
+          cors: true
+  getProductsById:
+    handler: handler.getProductsById
+    events:
+      - http:
+          path: /products/{productId}
           method: get
           cors: true
 #    The following are a few example events you can configure
