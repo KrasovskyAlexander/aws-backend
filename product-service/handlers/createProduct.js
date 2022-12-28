@@ -5,7 +5,7 @@ export const createProduct = async () => {
     try {
 
         return {
-            statusCode: 200,
+            statusCode: 201,
             headers,
             body: JSON.stringify({ message: `Product succesfully created` }),
         };
